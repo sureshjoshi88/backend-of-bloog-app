@@ -6,11 +6,7 @@ const router = require('./routes/user')
 
 app.use(express.json())
 const port = process.env.PORT
-connectdb().then(()=>{
-    console.log('database connect');
-}).catch((err)=>{
-    console.log(err);
-})
+connectdb()
 
 app.use('/api/user',router)
 
