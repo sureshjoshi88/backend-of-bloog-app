@@ -7,6 +7,7 @@ const port = process.env.PORT
 app.get('/',(req,res)=>{
     res.send("jai shree ram")
 })
+
 app.listen(port,()=>{
     console.log(`the server is running http://localhost:${port}`);
 })
