@@ -32,7 +32,7 @@ router.post('/blog', upload.single('img'),
         try {
             const { title, description, date } = req.body;
 
-            const blog = new Blog({
+            const blog = new blogschema({
                 title,
                 description,
                 date: date ? new Date(date) : new Date(),
