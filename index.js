@@ -7,7 +7,7 @@ const router = require('./routes/user')
 app.use(express.json())
 connectdb()
 
-app.use('/api/user',router)
+app.use('/api/blogs',router)
 const port = process.env.PORT
 app.listen(port,()=>{
     console.log(`the server is running http://localhost:${port}`);
