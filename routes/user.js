@@ -19,7 +19,7 @@ router.get('/blog', async (req, res) => {
     }
 })
 
-router.post('/blog', upload.single('img'),
+router.post('/blog', upload.single('images'),
     [
         body('title').trim().notEmpty().withMessage('Title is required'),
         body('description').trim().notEmpty().withMessage('Description is required'),
@@ -36,7 +36,7 @@ router.post('/blog', upload.single('img'),
                 title,
                 description,
                 date: date ? new Date(date) : new Date(),
-                img: req.file ? req.file.path : null, // Cloudinary URL
+                images: req.file ? req.file.path : req.body.images, // Cloudinary URL
             });
 
             await blog.save();
