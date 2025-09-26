@@ -3,8 +3,10 @@ require('dotenv').config()
 const app = express();
 const connectdb = require('./config/index')
 const router = require('./routes/user')
+const cors  = require('cors')
 
 app.use(express.json())
+app.use(cors());
 connectdb()
 
 app.use('/api/blogs',router)
