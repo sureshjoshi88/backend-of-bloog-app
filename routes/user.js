@@ -14,41 +14,14 @@ const upload = multer({ storage: storage });
 router.get('/blog', async (req, res) => {
     try {
         const blog = await blogschema.find()
+        const title =req.query
+        
         res.status(200).json({ status: true, message: "success", blog })
     } catch (error) {
         res.status(500).json({ status: false, message: "something went wrong", error: error })
     }
 })
 
-// router.post('/blog', upload.single('images'),
-//     [
-//         body('title').trim().notEmpty().withMessage('Title is required'),
-//         body('description').trim().notEmpty().withMessage('Description is required'),
-//     ], async (req, res) => {
-//         const errors = validationResult(req);
-//         if (!errors.isEmpty()) {
-//             return res.status(400).json({ status: false, errors: errors.array() });
-//         }
-
-//         try {
-//             const { title, description, date } = req.body;
-
-//             const blog = new blogschema({
-//                 title,
-//                 description,
-//                 date: date ? new Date(date) : new Date(),
-//                 images: req.file ? req.file.path : null, // Cloudinary URL
-//             });
-
-//             await blog.save();
-
-//             return res.status(201).json({ status: true, message: 'Blog created', blog });
-//         } catch (err) {
-//             console.error('Create blog error:', err);
-//             return res.status(500).json({ status: false, message: 'Server error' });
-//         }
-
-//     })
 
 
 router.post('/blog',
