@@ -15,8 +15,9 @@ router.get('/blog', async (req, res) => {
     try {
         const blog = await blogschema.find()
         const title =req.query
-        
-        res.status(200).json({ status: true, message: "success", blog })
+        const allblog = blog.filter((item)=>item.title==title)
+
+        res.status(200).json({ status: true, message: "success", blog:allblog })
     } catch (error) {
         res.status(500).json({ status: false, message: "something went wrong", error: error })
     }
