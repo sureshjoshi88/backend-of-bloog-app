@@ -12,14 +12,13 @@ const upload = multer({ storage: storage });
 
 router.get('/blog', async (req, res) => {
     try {
-        const blog = await blogschema.find()
         const {title} =req.query
         if(title){
           const blogs = await blogschema.find({"title":title})
-          // const blogs = blog.filter((item)=>item.title==title)
-          res.status(200).json({ status: true, message: "success", blog:blogs })
-
+         return res.status(200).json({ status: true, message: "success", blog:blogs })
         }
+
+        const blog = await blogschema.find()
         res.status(200).json({ status: true, message: "success", blog})
     } catch (error) {
         res.status(500).json({ status: false, message: "something went wrong", error: error })
