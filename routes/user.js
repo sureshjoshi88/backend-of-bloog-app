@@ -4,7 +4,6 @@ const blogschema = require('../models/blog')
 const multer = require("multer")
 const { body, validationResult } = require('express-validator')
 const { cloudinary } = require('../config/cloudinary')
-// const { storage,upload } = require("../config/cloudinary")
 
 
 
@@ -17,7 +16,7 @@ router.get('/blog', async (req, res) => {
         const title =req.query
         const allblog = title==""?blog:blog.filter((item)=>item.title==title)
 
-        res.status(200).json({ status: true, message: "success", blog:allblog })
+        res.status(200).json({ status: true, message: "success", blog:blog })
     } catch (error) {
         res.status(500).json({ status: false, message: "something went wrong", error: error })
     }
@@ -75,34 +74,5 @@ router.post('/blog',
   }
 );
 
-
-
-
-
-// router.post('/upload', upload.single('image'), (req, res) => {
-//   if (!req.file) {
-//     return res.status(400).json({ error: 'No file uploaded' });
-//   }
-
-//   cloudinary.uploader.upload_stream({ resource_type: 'auto' }, (error, result) => {
-//     if (error) {
-//       console.log(error);
-//       return res.status(500).json({ error: 'Error uploading to Cloudinary' });
-//     }
-
-//      const { title, description, date } = req.body;
-
-//             const blog = new blogschema({
-//                 title,
-//                 description,
-//                 date: date ? new Date(date) : new Date(),
-//                 images: req.file ? req.file.path : null, // Cloudinary URL
-//             });
-
-//             await blog.save();
-//     res.json({ public_id: result.public_id, url: result.secure_url });
-
-//   }).end(req.file.buffer);
-// });
 
 module.exports = router
