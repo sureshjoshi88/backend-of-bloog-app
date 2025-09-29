@@ -15,9 +15,14 @@ router.get('/blog', async (req, res) => {
         const {title} =req.query
         if(title){
           const blogs = await blogschema.find({"title":title})
+           if (blogs.length === 0) {
+                return res.status(404).json({ 
+                    status: false, 
+                    message: "No blog found with this title" 
+                });
+            }
          return res.status(200).json({ status: true, message: "success", blog:blogs })
         }
-
         const blog = await blogschema.find()
         res.status(200).json({ status: true, message: "success", blog})
     } catch (error) {
