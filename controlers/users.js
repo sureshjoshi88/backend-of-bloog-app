@@ -19,4 +19,8 @@ const getuser = async(req,res)=>{
         res.status(500).json({ status: false, message: "something went wrong", error: error })
     }
 }
-module.exports = {getuser}
+
+const addUser = async()=>{
+
+}
+module.exports = {getuser,addUser}
