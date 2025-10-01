@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const blogschema = require('../models/blog')
 const multer = require("multer")
-const { body, validationResult } = require('express-validator')
-const { cloudinary } = require('../config/cloudinary')
+const { body } = require('express-validator')
 const { getuser, addUser } = require('../controlers/users')
 
 

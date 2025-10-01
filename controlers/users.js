@@ -1,4 +1,4 @@
-const { body,validationResult } = require("express-validator");
+const {validationResult } = require("express-validator");
 const blogschema = require("../models/blog");
 const { cloudinary } = require("../config/cloudinary");
 
@@ -24,7 +24,7 @@ const getuser = async(req,res)=>{
     }
 }
 
-const addUser = async(req,res)=>{
+const addUser = (req,res)=>{
     const errors = validationResult(req);
         if (!errors.isEmpty()) {
           return res.status(400).json({ status: false, errors: errors.array() });
