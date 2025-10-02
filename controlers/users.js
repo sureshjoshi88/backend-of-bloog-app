@@ -67,4 +67,9 @@ const addUser = (req,res)=>{
         }
     
 }
+
+const updateUser = async()=>{
+
+}
+
 module.exports = {getuser,addUser}
