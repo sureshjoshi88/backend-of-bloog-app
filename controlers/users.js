@@ -73,7 +73,13 @@ const updateUser = async()=>{
 }
 
 const deleteUser = async()=>{
-
+  try {
+    const {id} = req.params;
+    const blogs  = await blogschema.deleteOne(id)
+    res.status(200).json({status:true,message:"blog delete successfully",blog:blogs})
+  } catch (error) {
+    res.status(500).json({status:false,message:"something went wrong"});
+  }
 }
 
-module.exports = {getuser,addUser}
+module.exports = {getuser,addUser,deleteUser}
