@@ -72,4 +72,8 @@ const updateUser = async()=>{
 
 }
 
+const deleteUser = async()=>{
+
+}
+
 module.exports = {getuser,addUser}
