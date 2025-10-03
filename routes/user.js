@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const multer = require("multer")
 const { body } = require('express-validator')
-const { getuser, addUser } = require('../controlers/users')
+const { getuser, addUser, deleteBlog } = require('../controlers/users')
 
 
 
@@ -16,6 +16,8 @@ router.post("/blog", upload.single('image'),
     body('title').trim().notEmpty().withMessage('Title is required'),
     body('description').trim().notEmpty().withMessage('Description is required'),
   ],addUser)
+
+router.delete("/blog/:id",deleteBlog)
 
 // router.post('/blog',
 //   upload.single('image'),

@@ -72,7 +72,7 @@ const updateUser = async () => {
 
 }
 
-const deleteUser = async () => {
+const deleteBlog = async (req,res) => {
   try {
     const { id } = req.params;
 
@@ -89,4 +89,4 @@ const deleteUser = async () => {
   }
 }
 
-module.exports = { getuser, addUser, deleteUser }
+module.exports = { getuser, addUser, deleteBlog }
