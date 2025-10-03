@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const blogschema = require("../models/blog");
 const { cloudinary } = require("../config/cloudinary");
+const mongoose = require("mongoose");
 
 
 const getuser = async (req, res) => {
@@ -86,6 +87,8 @@ const deleteBlog = async (req,res) => {
     res.status(200).json({ status: true, message: "blog delete successfully", blog: blogs })
   } catch (error) {
     res.status(500).json({ status: false, message: "server error", error: error.message });
+    console.log(error);
+    
   }
 }
 
