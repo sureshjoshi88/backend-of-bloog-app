@@ -81,7 +81,7 @@ const deleteUser = async () => {
     }
     res.status(200).json({ status: true, message: "blog delete successfully", blog: blogs })
   } catch (error) {
-    res.status(500).json({ status: false, message: "server error", error: error });
+    res.status(500).json({ status: false, message: "server error", error: error.message });
   }
 }
 
