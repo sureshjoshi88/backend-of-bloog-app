@@ -72,12 +72,12 @@ const addUser = (req, res) => {
 const updateUser = async () => {
 
 }
-
-const deleteBlog = async (req,res) => {
+x`x`
+const deleteBlog = async (req, res) => {
   try {
     const { id } = req.params;
 
-      if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ status: false, message: "Invalid blog ID" });
     }
     const blogs = await blogschema.findByIdAndDelete(id)
@@ -88,7 +88,7 @@ const deleteBlog = async (req,res) => {
   } catch (error) {
     res.status(500).json({ status: false, message: "server error", error: error.message });
     console.log(error);
-    
+
   }
 }
 
