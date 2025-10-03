@@ -75,6 +75,10 @@ const updateUser = async () => {
 const deleteUser = async () => {
   try {
     const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ status: false, message: "Invalid blog ID" });
+    }
     const blogs = await blogschema.findByIdAndDelete(id)
     if (!blogs) {
       return res.status(400).json({ status: false, message: "blog not found" })
