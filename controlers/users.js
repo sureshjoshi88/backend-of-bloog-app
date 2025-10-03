@@ -72,7 +72,7 @@ const addUser = (req, res) => {
 const updateUser = async () => {
 
 }
-x`x`
+
 const deleteBlog = async (req, res) => {
   try {
     const { id } = req.params;
