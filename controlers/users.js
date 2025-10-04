@@ -69,7 +69,7 @@ const addUser = (req, res) => {
 
 }
 
-const updateUser = async () => {
+const updateUser = async (req,res) => {
 const {title} = req.body
 const {id} = req.params
 if(!title){
