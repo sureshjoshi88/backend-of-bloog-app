@@ -70,7 +70,21 @@ const addUser = (req, res) => {
 }
 
 const updateUser = async () => {
+const {title} = req.body
+const {id} = req.params
+if(!title){
+  return res.status(400).json({status:false,message:"title is required"})
+}
 
+try {
+ const blogs  = await blogschema.findByIdAndUpdate(id,{title},{new:true})
+  if(!blogs){
+    res.status(404),json({status:false,message:"user not found"})
+  }
+  res.status(200).json({status:true,message:"user updated by successfully",blogs})
+} catch (error) {
+  
+}
 }
 
 const deleteBlog = async (req, res) => {
@@ -92,4 +106,4 @@ const deleteBlog = async (req, res) => {
   }
 }
 
-module.exports = { getuser, addUser, deleteBlog }
+module.exports = { getuser, addUser, deleteBlog,updateUser }
