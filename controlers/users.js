@@ -72,18 +72,19 @@ const addUser = (req, res) => {
 const updateUser = async (req,res) => {
 const {title} = req.body
 const {id} = req.params
+
 if(!title){
-  return res.status(400).json({status:false,message:"title is required"})
+  res.status(400).json({status:false,message:"title is required"})
 }
 
 try {
  const blogs  = await blogschema.findByIdAndUpdate(id,{title},{new:true})
   if(!blogs){
-    res.status(404),json({status:false,message:"user not found"})
+   return res.status(404),json({status:false,message:"user not found"})
   }
   res.status(200).json({status:true,message:"user updated by successfully",blogs})
 } catch (error) {
-  
+  res.status(500).json({status:false,error:error.message})
 }
 }
 
