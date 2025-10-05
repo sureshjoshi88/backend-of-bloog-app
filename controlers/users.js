@@ -70,16 +70,19 @@ const addUser = (req, res) => {
 }
 
 const updateUser = async (req,res) => {
-const {title} = req.body
+const {title,description} = req.body
 const {id} = req.params
 
-if(!title){
-  res.status(400).json({status:false,message:"title is required"})
+ if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ status: false, message: "Invalid blog ID" });
+    }
+if(!title || !description){
+ return res.status(400).json({status:false,message:"all field are required"})
 }
 
 
 try {
- const blogs  = await blogschema.findByIdAndUpdate(id,{title},{new:true})
+ const blogs  = await blogschema.findByIdAndUpdate(id,{title,description},{new:true})
   if(!blogs){
    return res.status(404),json({status:false,message:"user not found"})
   }
