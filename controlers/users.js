@@ -77,6 +77,7 @@ if(!title){
   res.status(400).json({status:false,message:"title is required"})
 }
 
+
 try {
  const blogs  = await blogschema.findByIdAndUpdate(id,{title},{new:true})
   if(!blogs){
@@ -84,6 +85,12 @@ try {
   }
   res.status(200).json({status:true,message:"user updated by successfully",blogs})
 } catch (error) {
+   if (error.name === "CastError") {
+      return res.status(400).json({
+        status: false,
+        message: "Invalid blog ID",
+      });
+    }
   res.status(500).json({status:false,error:error.message})
 }
 }
