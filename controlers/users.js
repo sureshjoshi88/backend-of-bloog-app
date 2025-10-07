@@ -177,4 +177,4 @@ const loginUser = async(req,res)=>{
     res.status(500).json({ message: 'Server error' });
   }
 }
-module.exports = { getuser, addUser, deleteBlog,updateUser ,signupUser}
+module.exports = { getuser, addUser, deleteBlog,updateUser ,signupUser,loginUser}
