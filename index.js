@@ -5,6 +5,7 @@ const connectdb = require('./config/index')
 const router = require('./routes/user')
 const cors  = require('cors')
 const bodyParser = require('body-parser');
+const authRoute = require('./routes/authRoutes');
 
 
 app.use(express.json())
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 connectdb()
 
 app.use('/api/blogs',router)
+app.use("/api/auth",authRoute)
 const port = process.env.PORT
 app.listen(port,()=>{
     console.log(`the server is running http://localhost:${port}`);
