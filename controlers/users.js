@@ -136,7 +136,7 @@ const signupUser = async(req,res)=>{
     // hash password
     const hashed = await bcrypt.hash(password, SALT_ROUNDS);
 
-    const user = new User({ name, email, password: hashed });
+    const user = await new User({ name, email, password: hashed });
     await user.save();
 
     // create JWT (you may exclude sensitive fields)
@@ -152,6 +152,7 @@ const signupUser = async(req,res)=>{
     res.status(500).json({ message: 'Server error' });
   }
 }
+
 
 
 const loginUser = async(req,res)=>{
@@ -177,4 +178,5 @@ const loginUser = async(req,res)=>{
     res.status(500).json({ message: 'Server error' });
   }
 }
+
 module.exports = { getuser, addUser, deleteBlog,updateUser ,signupUser,loginUser}

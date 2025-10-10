@@ -3,7 +3,6 @@ const router = express.Router()
 const multer = require("multer")
 const { body } = require('express-validator')
 const { getuser, addUser, deleteBlog, updateUser, signupUser, loginUser } = require('../controlers/users')
-const { sign } = require('jsonwebtoken')
 const auth = require('../middleware/auth')
 
 
@@ -16,7 +15,7 @@ const upload = multer({ storage: storage });
 
 router.post("/signup", signupUser)
 router.post("/login",loginUser)
-router.get('/blog',auth, getuser)
+router.get('/blog', getuser)
 
 router.post("/blog",auth, upload.single('image'),
   [
