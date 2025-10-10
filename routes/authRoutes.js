@@ -1,5 +1,5 @@
 const express = require('express')
-const { model } = require('mongoose')
+const { signupUser, loginUser } = require('../controlers/authenction')
 const authRoute = express.Router()
 
 
