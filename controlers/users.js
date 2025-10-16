@@ -45,7 +45,7 @@ const addUser = (req, res) => {
 
     // Cloudinary upload
     cloudinary.uploader.upload_stream(
-      { resource_type: 'auto', folder: 'blogs' },
+      { resource_type: 'auto', folder: 'blogs'},
       async (error, result) => {
         if (error) {
           console.error('Cloudinary upload error:', error);
