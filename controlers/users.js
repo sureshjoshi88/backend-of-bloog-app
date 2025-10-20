@@ -86,7 +86,7 @@ if(!title || !description){
 try {
  const blogs  = await blogschema.findByIdAndUpdate(id,{title,description},{new:true})
   if(!blogs){
-   return res.status(404),json({status:false,message:"user not found"})
+   return res.status(404).json({status:false,message:"user not found"})
   }
   res.status(200).json({status:true,message:"user updated by successfully",blogs})
 } catch (error) {
@@ -115,9 +115,6 @@ const deleteBlog = async (req, res) => {
   } catch (error) {
     res.status(500).json({ status: false, message: "server error", error: error.message });
     console.log(error);
-
   }
 }
-
-
 module.exports = { getuser, addUser, deleteBlog,updateUser}
