@@ -3,10 +3,7 @@ const blogschema = require("../models/blog");
 const { cloudinary } = require("../config/cloudinary");
 const mongoose = require("mongoose");
 
-// const bcrypt = require('bcrypt');
-// const jwt = require('jsonwebtoken');
-// const User = require('../models/user');
-// require('dotenv').config();
+
 
 
 const getuser = async (req, res) => {
