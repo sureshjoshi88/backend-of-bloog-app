@@ -72,13 +72,13 @@ const addUser = (req, res) => {
 }
 
 const updateUser = async (req,res) => {
-const {title,description} = req.body
+const {title,description,image} = req.body
 const {id} = req.params
 
  if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ status: false, message: "Invalid blog ID" });
     }
-if(!title || !description){
+if(!title || !description||image){
  return res.status(400).json({status:false,message:"all field are required"})
 }
 
