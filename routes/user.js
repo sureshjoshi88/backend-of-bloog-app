@@ -22,7 +22,7 @@ router.post("/blog",auth, upload.single('image'),
     body('description').trim().notEmpty().withMessage('Description is required'),
   ], addUser)
 
-router.patch("/blog/:id",auth, updateUser)
+router.put("/blog/:id",auth, updateUser)
 router.delete("/blog/:id",auth, deleteBlog)
 
 
