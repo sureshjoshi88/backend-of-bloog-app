@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const multer = require("multer")
 const { body } = require('express-validator')
-const { getuser, addUser, deleteBlog, updateUser, signupUser, loginUser } = require('../controlers/users')
+const { getuser, addUser, deleteBlog, updateUser } = require('../controlers/users')
 const auth = require('../middleware/auth')
 
 
