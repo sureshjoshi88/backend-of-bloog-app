@@ -23,7 +23,7 @@ const signupUser = async(req,res)=>{
     await user.save();
 
     // create JWT (you may exclude sensitive fields)
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '1h' });
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
 
     res.status(201).json({
       message: 'User created',
