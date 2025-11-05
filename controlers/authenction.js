@@ -22,13 +22,9 @@ const signupUser = async(req,res)=>{
     const user = await new User({ name, email, password: hashed });
     await user.save();
 
-    // create JWT (you may exclude sensitive fields)
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
-
     res.status(201).json({
       message: 'User created',
-      user: { id: user._id, name: user.name, email: user.email },
-      token:token
+      user,
     });
   } catch (err) {
     console.error(err);
