@@ -34,7 +34,7 @@ const addUser = (req, res) => {
   }
 
   try {
-    const { title, description, date } = req.body;
+    const { title, description } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ status: false, message: 'Image is required' });
@@ -50,10 +50,12 @@ const addUser = (req, res) => {
         }
 
         // Save blog in DB
+        const dates  = new Date()
+  const formateDate = `${dates.getDate()}-${dates.getMonth()+1}-${dates.getFullYear()}`
         const blog = new blogschema({
           title,
           description,
-          date: date ? new Date(date) : new Date(),
+          date: formateDate,
           image: result.secure_url,
           public_id: result.public_id,
         });
@@ -75,7 +77,6 @@ const updateUser = async (req,res) => {
 const {title,description} = req.body
 
 const {id} = req.params
-console.log(req.body);
 
  if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ status: false, message: "Invalid blog ID" });
@@ -86,7 +87,10 @@ if(!title || !description){
 
 
 try {
- const blogs  = await blogschema.findByIdAndUpdate(id,{title,description},{new:true})
+  const dates  = new Date()
+  const formateDate = `${dates.getDate()}-${dates.getMonth()+1}-${dates.getFullYear()}`
+  console.log(formateDate)
+ const blogs  = await blogschema.findByIdAndUpdate(id,{title,description,date: formateDate},{new:true})
   if(!blogs){
    return res.status(404).json({status:false,message:"user not found"})
   }
