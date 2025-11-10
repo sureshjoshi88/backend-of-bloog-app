@@ -12,11 +12,11 @@ app.use(express.json())
 app.use(cors());
 app.use(bodyParser.json());
 
-connectDb()
+connectDb().then(()=>app.listen(port,()=>{
+    console.log(`the server is running http://localhost:${port}`);
+})
+)
 
 app.use('/api/blogs',router)
 app.use("/api/auth",authRoute)
 const port = process.env.PORT
-app.listen(port,()=>{
-    console.log(`the server is running http://localhost:${port}`);
-})
