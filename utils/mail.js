@@ -10,7 +10,7 @@ const transpoter = nodemailer.createTransport({
 })
 
 const sendMail = async()=>{
-    transpoter.sendMail({
+    await transpoter.sendMail({
         from:"abc@gmail.com",
         to:"def@gmail.com",
         subject:"Test Mail",
