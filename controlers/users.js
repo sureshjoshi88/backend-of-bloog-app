@@ -42,7 +42,7 @@ const addUser = (req, res) => {
 
     // Cloudinary upload
     cloudinary.uploader.upload_stream(
-      { resource_type: 'auto', folder: 'blogs'},
+      { resource_type: 'auto', folder: 'blogs' },
       async (error, result) => {
         if (error) {
           console.error('Cloudinary upload error:', error);
@@ -50,12 +50,9 @@ const addUser = (req, res) => {
         }
 
         // Save blog in DB
-        const dates  = new Date()
-  const formateDate = `${dates.getDate()}-${dates.getMonth()+1}-${dates.getFullYear()}`
         const blog = new blogschema({
           title,
           description,
-          date: formateDate,
           image: result.secure_url,
           public_id: result.public_id,
         });
@@ -73,37 +70,35 @@ const addUser = (req, res) => {
 
 }
 
-const updateUser = async (req,res) => {
-const {title,description} = req.body
+const updateUser = async (req, res) => {
+  const { title, description } = req.body
 
-const {id} = req.params
+  const { id } = req.params
 
- if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ status: false, message: "Invalid blog ID" });
-    }
-if(!title || !description){
- return res.status(400).json({status:false,message:"all field are required"})
-}
-
-
-try {
-  const dates  = new Date()
-  const formateDate = `${dates.getDate()}-${dates.getMonth()+1}-${dates.getFullYear()}`
-  console.log(formateDate)
- const blogs  = await blogschema.findByIdAndUpdate(id,{title,description,date: formateDate},{new:true})
-  if(!blogs){
-   return res.status(404).json({status:false,message:"user not found"})
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ status: false, message: "Invalid blog ID" });
   }
-  res.status(200).json({status:true,message:"user updated by successfully",blogs})
-} catch (error) {
-   if (error.name === "CastError") {
+  if (!title || !description) {
+    return res.status(400).json({ status: false, message: "all field are required" })
+  }
+
+
+  try {
+
+    const blogs = await blogschema.findByIdAndUpdate(id, { title, description }, { new: true })
+    if (!blogs) {
+      return res.status(404).json({ status: false, message: "user not found" })
+    }
+    res.status(200).json({ status: true, message: "user updated by successfully", blogs })
+  } catch (error) {
+    if (error.name === "CastError") {
       return res.status(400).json({
         status: false,
         message: "Invalid blog ID",
       });
     }
-  res.status(500).json({status:false,error:error.message})
-}
+    res.status(500).json({ status: false, error: error.message })
+  }
 }
 
 const deleteBlog = async (req, res) => {
@@ -123,4 +118,4 @@ const deleteBlog = async (req, res) => {
     console.log(error);
   }
 }
-module.exports = { getuser, addUser, deleteBlog,updateUser}
+module.exports = { getuser, addUser, deleteBlog, updateUser }
