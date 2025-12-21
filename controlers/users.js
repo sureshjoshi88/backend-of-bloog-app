@@ -30,7 +30,7 @@ const getuser = async (req, res) => {
 const addUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ status: false, errors: errors.array() });
+    return res.status(400).json({ status: false, errors: errors?.array() });
   }
 
   try {
@@ -53,8 +53,8 @@ const addUser = (req, res) => {
         const blog = new blogschema({
           title,
           description,
-          image: result.secure_url,
-          public_id: result.public_id,
+          image: result?.secure_url,
+          public_id: result?.public_id,
         });
 
         await blog.save();
