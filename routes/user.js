@@ -16,11 +16,7 @@ const upload = multer({ storage: storage });
 
 router.get('/blog', getuser)
 
-router.post("/blog",auth, upload.single('image'),
-  [
-    body('title').trim().notEmpty().withMessage('Title is required'),
-    body('description').trim().notEmpty().withMessage('Description is required'),
-  ], addUser)
+router.post("/blog",auth, upload.single('image'), addUser)
 
 router.put("/blog/:id",auth, updateUser)
 router.delete("/blog/:id",auth, deleteBlog)
