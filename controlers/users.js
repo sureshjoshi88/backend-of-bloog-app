@@ -24,6 +24,8 @@ const getuser = async (req, res) => {
     res.status(200).json({ status: true, message: "success", blog: blog })
   } catch (error) {
     res.status(500).json({ status: false, message: "server error", error: error })
+    console.log(error);
+    
   }
 }
 
