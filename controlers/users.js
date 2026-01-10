@@ -7,7 +7,7 @@ const cloudinary = require('cloudinary').v2;
 
 
 
-const getuser = async (req, res) => {
+const getBlog = async (req, res) => {
   try {
     const { title } = req.query
     if (title) {
@@ -31,7 +31,7 @@ const getuser = async (req, res) => {
 }
 
 
-const addUser = async (req, res) => {
+const addBlog = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ status: false, errors: errors.array() });
@@ -67,7 +67,7 @@ const addUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateBlog = async (req, res) => {
   const { title, description } = req.body
 
   const { id } = req.params
@@ -121,4 +121,4 @@ const deleteBlog = async (req, res) => {
     console.log(error);
   }
 }
-module.exports = { getuser, addUser, deleteBlog, updateUser }
+module.exports = { getBlog, addBlog, deleteBlog, updateBlog }
