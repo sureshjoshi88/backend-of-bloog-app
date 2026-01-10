@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const blogschema = require("../models/blog");
 const mongoose = require("mongoose");
 const uploadToCloudinary = require("../utils/cloudinary");
+const cloudinary = require('cloudinary').v2;
 
 
 
@@ -146,6 +147,15 @@ const deleteBlog = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ status: false, message: "Invalid blog ID" });
+    }
+    const check = await blogschema.findById(id);
+    if (!check) {
+      return res.status(404).json({ status: false, message: "blog not found" });
+    }
+
+    if(check.public_id){
+      // Delete from Cloudinary
+      await cloudinary.uploader.destroy(check.public_id);
     }
     const blogs = await blogschema.findByIdAndDelete(id)
     if (!blogs) {
