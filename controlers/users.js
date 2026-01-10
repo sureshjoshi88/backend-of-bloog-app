@@ -30,49 +30,6 @@ const getuser = async (req, res) => {
   }
 }
 
-// const  addUser = (req, res) => {
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     return res.status(400).json({ status: false, errors: errors?.array() });
-//   }
-
-//   try {
-//     const { title, description } = req.body;
-
-//     if (!req.file) {
-//       return res.status(400).json({ status: false, message: 'Image is required' });
-//     }
-
-//     // Cloudinary upload
-//     cloudinary.uploader.upload_stream(
-//       { resource_type: 'auto', folder: 'blogs' },
-//       async (error, result) => {
-//         if (error) {
-//           console.error('Cloudinary upload error:', error);
-//           return res.status(500).json({ status: false, message: 'Cloudinary error' });
-//         }
-
-//         // Save blog in DB
-//         const blog = new blogschema({
-//           title,
-//           description,
-//           image: result?.secure_url,
-//           public_id: result?.public_id,
-//         });
-
-//         await blog.save();
-
-//         return res.status(201).json({ status: true, message: 'Blog created', blog });
-//       }
-//     ).end(req.file.buffer);
-
-//   } catch (err) {
-//     console.error('Create blog error:', err);
-//     return res.status(500).json({ status: false, message: 'Server error' });
-//   }
-
-// }
-
 
 const addUser = async (req, res) => {
   const errors = validationResult(req);
