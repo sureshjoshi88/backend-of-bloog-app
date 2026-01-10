@@ -26,7 +26,7 @@ const getuser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ status: false, message: "server error", error: error })
     console.log(error);
-    
+
   }
 }
 
@@ -153,14 +153,11 @@ const deleteBlog = async (req, res) => {
       return res.status(404).json({ status: false, message: "blog not found" });
     }
 
-    if(check.public_id){
+    if (check.public_id) {
       // Delete from Cloudinary
       await cloudinary.uploader.destroy(check.public_id);
     }
     const blogs = await blogschema.findByIdAndDelete(id)
-    if (!blogs) {
-      return res.status(400).json({ status: false, message: "blog not found" })
-    }
     res.status(200).json({ status: true, message: "blog delete successfully", blog: blogs })
   } catch (error) {
     res.status(500).json({ status: false, message: "server error", error: error.message });
